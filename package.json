@@ -1,0 +1,30 @@
+{
+  "name": "thmr-promo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "THMR 东方音乐电台宣传片《与幻想乡同频》— code-generated 1080p60 promo",
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "audio": "node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON tools/build-audio.mjs",
+    "render": "remotion render src/index.ts Promo out/thmr-promo-video.mp4",
+    "preview": "remotion render src/index.ts Promo out/preview/thmr-promo-preview.mp4 --scale=0.5 --crf=23",
+    "still": "remotion still src/index.ts Promo",
+    "cover": "remotion still src/index.ts Cover out/thmr-promo-cover.png",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.542",
+    "qrcode": "1.5.4",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "remotion": "4.0.542"
+  },
+  "devDependencies": {
+    "@types/qrcode": "^1.5.5",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "playwright-core": "1.65.0",
+    "sharp": "0.35.5",
+    "typescript": "~5.9.0"
+  }
+}

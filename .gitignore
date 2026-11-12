@@ -1,0 +1,7 @@
+/_refs*
+/.venv*
+/node_modules*
+/out*
+/gen*
+/captures*
+key.txt
