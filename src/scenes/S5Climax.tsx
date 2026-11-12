@@ -1,7 +1,7 @@
 // S5 高潮 — Bad Apple's second drop: mascot roll call, the title, a wall of danmaku.
 import React, { useMemo } from "react";
 import { AbsoluteFill, Img, staticFile } from "remotion";
-import { BA, bar, CAST, DANMAKU_CLIMAX, FPS, MASCOTS, ROLLCALL, T5, T6, TITLE_HITS } from "../timeline";
+import { BA, CAST, DANMAKU_CLIMAX, FPS, MASCOTS, ROLLCALL, T5, T6, TITLE_HITS, T_WALL, T_CTA } from "../timeline";
 import { backOut, beatPulse, clamp, easeIn, easeOut5, lerp, prog, useT } from "../lib/anim";
 import { SERIF, theme } from "../theme";
 import { Dialogue } from "../components/Dialogue";
@@ -11,8 +11,7 @@ import { Sprite } from "../components/Sprite";
 
 const BEAT = 60 / BA.bpm;
 const TITLE = "与幻想乡同频";
-const T_TITLE = bar(52);
-const T_WALL = bar(56);
+const T_TITLE = TITLE_HITS[0];
 
 /** The title lock-up; also used for the cover still. `hits` = per-glyph landing times. */
 export const TitleLockup: React.FC<{ t: number; hits?: number[]; y?: number; size?: number }> = ({ t, hits, y = 150, size = 236 }) => (
@@ -69,7 +68,7 @@ export const S5Climax: React.FC = () => {
 
   // ── A: roll call ──
   if (t < T_TITLE) {
-    const i = Math.min(MASCOTS.length - 1, Math.max(0, Math.floor((t - T5) / (2 * BEAT))));
+    const i = Math.max(0, ROLLCALL.filter((hit) => t >= hit).length - 1);
     const who = MASCOTS[i];
     const c = CAST[who];
     const local = t - ROLLCALL[i];
@@ -99,7 +98,7 @@ export const S5Climax: React.FC = () => {
   // ── B/C: title + danmaku wall ──
   const sinceTitle = t - T_TITLE;
   const pulse = beatPulse(t, T_TITLE, BEAT, 6);
-  const cta = easeOut5(prog(t, T_WALL, 0.4));
+  const cta = easeOut5(prog(t, T_CTA, 0.4));
   return (
     <AbsoluteFill style={{ background: theme.night, overflow: "hidden" }}>
       <AbsoluteFill style={{ transform: `scale(${1.12 + 0.012 * pulse - 0.06 * prog(t, T_TITLE, T6 - T_TITLE)}, ${Math.max(0.004, 1 - out)})`, filter: out > 0 ? `brightness(${1 + out * 3})` : undefined }}>

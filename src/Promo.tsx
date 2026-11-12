@@ -1,9 +1,10 @@
 import React from "react";
 import { AbsoluteFill, Audio, staticFile, useCurrentFrame } from "remotion";
-import { FPS, T1, T2, T3, T4, T5, T6 } from "./timeline";
+import { FPS, T1, T2, T3, T4, T5, T6, TITLE_HITS } from "./timeline";
 import { easeOut, prog, TimeCtx } from "./lib/anim";
 import { theme } from "./theme";
 import { NowPlaying } from "./components/NowPlaying";
+import { BeatStrip } from "./components/Beat";
 import { S0Intro } from "./scenes/S0Intro";
 import { S1Shrine } from "./scenes/S1Shrine";
 import { S2Tour } from "./scenes/S2Tour";
@@ -44,7 +45,8 @@ export const Promo: React.FC = () => {
         {t >= T4 && t < T5 && <S4Devices />}
         {t >= T5 && t < T6 && <S5Climax />}
         {t >= T6 && <S6Outro />}
-        <NowPlaying t={t} />
+        <BeatStrip t={t} />
+        {(t < TITLE_HITS[0] || t >= T6) && <NowPlaying t={t} />}
       </AbsoluteFill>
       <Audio src={staticFile("audio/soundtrack.wav")} />
     </TimeCtx.Provider>
