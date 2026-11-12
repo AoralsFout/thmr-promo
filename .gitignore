@@ -1,7 +1,42 @@
-/_refs*
-/.venv*
-/node_modules*
-/out*
-/gen*
-/captures*
+# Dependencies and local Python environments
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Local references, raw recordings and generated intermediates
+/_refs/
+/captures/
+/gen/
+
+# Remotion renders, bundles and caches
+/out/
+/build/
+/dist/
+.cache/
+.remotion/
+*.tsbuildinfo
+
+# Optional speech experiments (the film uses public/audio/soundtrack.wav)
+/public/audio/lines/
+/public/data/lines.json
+
+# Local credentials and environment files
 key.txt
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.key
+*.pem
+*.p12
+*.pfx
+
+# Logs, editor state and OS metadata
+*.log
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+Desktop.ini

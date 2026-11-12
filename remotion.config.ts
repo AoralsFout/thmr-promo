@@ -1,8 +1,7 @@
 import { Config } from "@remotion/cli/config";
 
-// 1080p60 master settings. Audio is mastered separately with ffmpeg and muxed
-// after the picture render, so the Remotion output only has to be a clean
-// high-bitrate picture.
+// 1080p60 master settings. The soundtrack is pre-mixed by tools/build-audio.mjs
+// and included by src/Promo.tsx, so the rendered video already contains audio.
 Config.setVideoImageFormat("jpeg");
 Config.setJpegQuality(96);
 Config.setCodec("h264");

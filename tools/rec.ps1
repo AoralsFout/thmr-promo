@@ -2,7 +2,7 @@
 #   $p = Start-Rec 'name'      -> starts 60fps window capture to captures/app/name.mkv
 #   Stop-Rec $p                -> finalizes the file
 #   Grab 'name'                -> single PNG frame (kills ffmpeg if the window is static)
-$script:Root = 'E:\thmr-promo\version-1'
+$script:Root = Split-Path -Parent $PSScriptRoot
 $script:Src = 'gfxcapture=window_exe=thmr_app:capture_cursor=0:max_framerate=60,hwdownload,format=bgra'
 
 function Start-Rec([string]$name) {

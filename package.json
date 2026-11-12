@@ -2,6 +2,7 @@
   "name": "thmr-promo",
   "version": "1.0.0",
   "private": true,
+  "license": "MIT",
   "description": "THMR 东方音乐电台宣传片《与幻想乡同频》— code-generated 1080p60 promo",
   "scripts": {
     "studio": "remotion studio src/index.ts",
