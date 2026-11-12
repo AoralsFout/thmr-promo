@@ -11,6 +11,7 @@
     "preview": "remotion render src/index.ts Promo out/preview/thmr-promo-preview.mp4 --scale=0.5 --crf=23",
     "still": "remotion still src/index.ts Promo",
     "cover": "remotion still src/index.ts Cover out/thmr-promo-cover.png",
+    "warning": "remotion render src/index.ts PhotosensitivityWarning out/thmr-photosensitivity-warning.mp4",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

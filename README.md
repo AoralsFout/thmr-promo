@@ -30,10 +30,19 @@ npm run studio
 | `npm run preview` | 半分辨率预览视频：`out/preview/thmr-promo-preview.mp4` |
 | `npm run render` | 正式视频：`out/thmr-promo-video.mp4` |
 | `npm run cover` | 封面：`out/thmr-promo-cover.png` |
+| `npm run warning` | 独立的 2 秒光敏性癫痫警告片头：`out/thmr-photosensitivity-warning.mp4` |
 | `npm run still -- out/still.png --frame=900` | 导出正片第 900 帧 |
 | `npm run audio` | 从本地原始音乐重新混音，覆盖 `public/audio/soundtrack.wav` |
 
 正片为 **1920 × 1080、60 fps**；默认视频编码为 H.264 / yuv420p，CRF 14。`preview` 将分辨率缩放为 960 × 540，CRF 23。时长、场景切点和音乐节拍由 `src/timeline.ts` 计算，视频会包含 `public/audio/soundtrack.wav`。
+
+`Promo` 开头包含 2 秒静音光敏性癫痫警告，沿用原片配色、字体与电波圆环，使用缓慢展开和淡出动画。正片画面与音轨一起延后 2 秒，内部剪辑和卡点不变，无需为警告片头重新混音。警告画面位于 `src/scenes/PhotosensitivityWarning.tsx`；持续时间由 `src/timeline.ts` 的 `WARNING_SECONDS` 控制，也可在 Studio 中单独选择 `PhotosensitivityWarning` 预览。
+
+给已有成片追加警告时，音轨必须包含实际的片头静音采样；仅移动音轨时间戳，部分播放器或剪辑软件会忽略起始偏移而提前播放。`tools/check-warning-sync.mjs` 会解码音频，检查片头静音以及原片六处关键位置的波形同步。第二个参数必须是**未加警告的原始成片**：
+
+```sh
+node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON tools/check-warning-sync.mjs out/thmr-promo-with-warning-synced.mp4 path/to/original-without-warning.mp4
+```
 
 渲染配置使用 `angle` 图形后端。仓库保留的是 Windows 制作环境配置；其他平台遇到浏览器或 GPU 初始化问题时，可按本机环境调整 `remotion.config.ts`。
 

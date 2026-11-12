@@ -1,6 +1,6 @@
 import React from "react";
-import { AbsoluteFill, Audio, staticFile, useCurrentFrame } from "remotion";
-import { FPS, T1, T2, T3, T4, T5, T6, TITLE_HITS } from "./timeline";
+import { AbsoluteFill, Audio, Sequence, staticFile, useCurrentFrame } from "remotion";
+import { CONTENT_FRAMES, FPS, T1, T2, T3, T4, T5, T6, TITLE_HITS, WARNING_FRAMES } from "./timeline";
 import { easeOut, prog, TimeCtx } from "./lib/anim";
 import { theme } from "./theme";
 import { NowPlaying } from "./components/NowPlaying";
@@ -12,13 +12,25 @@ import { S3News } from "./scenes/S3News";
 import { S4Devices } from "./scenes/S4Devices";
 import { S5Climax } from "./scenes/S5Climax";
 import { S6Outro } from "./scenes/S6Outro";
+import { PhotosensitivityWarning } from "./scenes/PhotosensitivityWarning";
+
+export const Promo: React.FC = () => (
+  <AbsoluteFill style={{ background: theme.night }}>
+    <Sequence durationInFrames={WARNING_FRAMES} name="光敏性癫痫警告">
+      <PhotosensitivityWarning />
+    </Sequence>
+    <Sequence from={WARNING_FRAMES} durationInFrames={CONTENT_FRAMES} name="正片">
+      <Film />
+    </Sequence>
+  </AbsoluteFill>
+);
 
 /**
  * 《与幻想乡同频》— the whole film. Scenes read absolute film time from TimeCtx
  * (see src/timeline.ts for every cut point); the soundtrack is one pre-mixed
  * file built by `npm run audio`.
  */
-export const Promo: React.FC = () => {
+const Film: React.FC = () => {
   const frame = useCurrentFrame();
   const t = frame / FPS;
   // S0 → S1: the barrier opens as an expanding circle

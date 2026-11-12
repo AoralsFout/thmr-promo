@@ -1,11 +1,12 @@
 import React from "react";
 import { AbsoluteFill, Composition, Img, staticFile } from "remotion";
-import { FPS, TOTAL_FRAMES } from "./timeline";
+import { FPS, TOTAL_FRAMES, WARNING_FRAMES } from "./timeline";
 import { TimeCtx } from "./lib/anim";
 import { SERIF, theme } from "./theme";
 import { Promo } from "./Promo";
 import { Lineup, TitleLockup } from "./scenes/S5Climax";
 import { Petals, Rings } from "./components/Fx";
+import { PhotosensitivityWarning } from "./scenes/PhotosensitivityWarning";
 
 /** Cover / thumbnail still (1920×1080). */
 const Cover: React.FC = () => (
@@ -35,6 +36,7 @@ const Cover: React.FC = () => (
 export const RemotionRoot: React.FC = () => (
   <>
     <Composition id="Promo" component={Promo} durationInFrames={TOTAL_FRAMES} fps={FPS} width={1920} height={1080} />
+    <Composition id="PhotosensitivityWarning" component={PhotosensitivityWarning} durationInFrames={WARNING_FRAMES} fps={FPS} width={1920} height={1080} />
     <Composition id="Cover" component={Cover} durationInFrames={1} fps={FPS} width={1920} height={1080} />
   </>
 );

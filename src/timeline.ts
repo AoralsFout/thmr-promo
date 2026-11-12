@@ -16,6 +16,9 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 export const FPS = 60;
+/** Silent viewing notice; all music and scene times below stay relative to the film. */
+export const WARNING_SECONDS = 2;
+export const WARNING_FRAMES = WARNING_SECONDS * FPS;
 
 export const AF = {
   id: '6399d6f7b36b6364',
@@ -53,7 +56,8 @@ export const T4B = bar(24); //   └ 看板娘主题
 export const T5 = bar(30); // S5 高潮 (BA second drop)
 export const T6 = bar(38); // S6 尾声
 export const T_END = T6 + 14.1;
-export const TOTAL_FRAMES = Math.ceil(T_END * FPS);
+export const CONTENT_FRAMES = Math.ceil(T_END * FPS);
+export const TOTAL_FRAMES = WARNING_FRAMES + CONTENT_FRAMES;
 
 /** Where AF sits in the film: film second = track second + offset. */
 export const AF_OFFSET = T_LOCK - (AF.beat0 + AF_ENTRY * AF_BEAT);
